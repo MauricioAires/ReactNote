@@ -66,6 +66,11 @@ export const DivForm = styled.div `
     }
 
 
+    span{
+        color:red;
+        font-size:11px;
+    }
+
     a  input{
         background: #C4C4C4 !important;
     }

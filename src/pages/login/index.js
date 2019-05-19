@@ -8,7 +8,8 @@ class login extends Component {
   constructor(props){
     super(props);
     this.state ={
-      userData:[]
+      userData:[],
+      erro:[]
     }
   }
   
@@ -17,7 +18,6 @@ class login extends Component {
       const id = localStorage.getItem('@token');
       this.props.history.push(`/dashboard/${id}`)
     }
-    
   }
 
   handleClickLogin = (data) => {
@@ -33,7 +33,10 @@ class login extends Component {
       this.props.history.push(`/dashboard/${this.state.userData.user.uid}`)
     }) )
     .catch((erro) => {
-      console.error("Erro ao autentica",erro);
+      console.log(erro)
+      this.setState({
+        erro
+      })
     })
   }
 
@@ -53,8 +56,11 @@ class login extends Component {
               <DivForm>
                 <h2>Acessar conta</h2>
                 <Form onSubmit={this.handleClickLogin} className="form">
-                    <Input  type="email" name="email" placeholder="Email" />
+                <span> { this.state.erro.code === "auth/user-not-found" &&  "Não há registro de usuário correspondente a esse identificador. O usuário pode ter sido excluído."} </span>
+                    <Input  type="text" name="email" placeholder="Email" />
+                      <span> { this.state.erro.code === "auth/invalid-email" && "O endereço de email está mal formatado."} </span>
                     <Input security="true" type="password" name="senha" placeholder="Senha" />
+                       <span> { this.state.erro.code === "auth/wrong-password" && "A senha é inválida ou o usuário não possui uma senha."} </span>
                     <Input type="submit" name="login" value="ENTRAR"/>
                     <Link to="/register">
                       <Input type="submit" name="register" value="CADRASTRE-SE" />

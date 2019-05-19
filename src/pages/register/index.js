@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import iconUser from '../../assets/default-user.jpeg';
 import { ContainerRegister,DivForm } from './styles.js';
+import * as Yup from 'yup';
 
 
 // bando de dados connect
@@ -52,8 +53,17 @@ class register extends Component {
 };
 
   render() {
+
+
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      email: Yup.string().email().required(),
+      senha: Yup.string().min(4).required(),
+       
+    });
+
+
     const RegisterTrue = (
-      
       <div className="alert">
           <p>Cadastro Realizado com sucesso !</p>
       </div>
@@ -72,10 +82,10 @@ class register extends Component {
             
               <DivForm>
                 <h2>Acessar conta</h2>
-                <Form className="form" onSubmit={this.handleSubmit}>
-                    <label>
+                <Form schema={schema} className="form" onSubmit={this.handleSubmit}>
+                    <div>
                         <img src={iconUser} alt="Icone user" />
-                    </label>
+                    </div>
                     
                     <Input type="text" name="name" placeholder="Nome" />
                     <Input type="email" name="email" placeholder="Email" />

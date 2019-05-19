@@ -199,6 +199,7 @@ export const DivNoteBackground = styled.div`
         flex-direction:column;
 
 
+     
         label{
            border-radius:10px;
            justify-content:center;
@@ -216,6 +217,11 @@ export const DivNoteBackground = styled.div`
             flex-direction:column;
             width:100%;
             padding:20px;
+
+            span{
+            color:red;
+            font-size:11px;
+                 }
         }
 
         textarea{
@@ -292,6 +298,11 @@ export const DivVideoBackground = styled.div`
             flex-direction:column;
             width:100%;
             padding:20px;
+
+            span{
+            color:red;
+            font-size:11px;
+                 }
         }
 
         
@@ -520,6 +531,12 @@ export const DivForm = styled.div`
             width:100%;
            
         }
+
+
+    span{
+        color:red;
+        font-size:11px;
+    }
         input{
             padding:3px;
             margin:10px;

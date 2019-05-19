@@ -8,7 +8,7 @@ import NoteDate from '../../components/NoteComponent';
 import VideoDate from '../../components/VideoComponent';
 import iconUser from '../../assets/default-user.jpeg';
 import { DivForm, BodyDash, DivOutBackground, DivModalEditUser, Logo, User, Video, Content, Note, DivVideoBackground, DivNoteBackground } from './styles.js';
-
+import * as Yup from 'yup';
 // conect firebase
 import firebase from '../../Firebase';
 
@@ -211,12 +211,24 @@ class dashboard extends Component {
       email: localStorage.getItem("@email"),
     }
 
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      email: Yup.string().email().required(),
+    });
+
+    const schemaVideo = Yup.object().shape({
+      url: Yup.string().required(),
+    });
+    
+    const schemaNote = Yup.object().shape({
+      textonote: Yup.string().required(),
+    });
     const ModalNote =
       <DivNoteBackground>
         <div id="back-div" onClick={this.handleClickNote}></div>
         <div>
           <label> Nova Nota </label>
-          <Form onSubmit={this.handleAddNote}>
+          <Form schema={schemaNote}  onSubmit={this.handleAddNote}>
             <Textarea name="textonote" placeholder="Texto ..."></Textarea>
             <Input name="submit" type="submit" value="SALVAR" />
           </Form>
@@ -233,13 +245,13 @@ class dashboard extends Component {
         <div id="back-div" onClick={this.handleEditUser}></div>
         <DivForm>
           <h2>Editar Conta</h2>
-          <Form className="form" initialData={initialData} onSubmit={this.handleSubmitEditUser}>
+          <Form schema={schema} className="form" initialData={initialData} onSubmit={this.handleSubmitEditUser}>
             <label>
               <img src={iconUser} alt="Icone user" />
             </label>
 
-            <Input type="text" required="true" name="name" placeholder="Nome" />
-            <Input type="email" required="true" name="email" placeholder="Email" />
+            <Input type="text" name="name" placeholder="Nome" />
+            <Input type="email"  name="email" placeholder="Email" />
             <Input type="submit" name="login" value="SALVAR" />
           </Form>
         </DivForm>
@@ -250,7 +262,7 @@ class dashboard extends Component {
         <div id="back-div" onClick={this.handleClickVideo}></div>
         <div>
           <label> Novo Video </label>
-          <Form onSubmit={this.handleAddVideo}>
+          <Form schema={schemaVideo} onSubmit={this.handleAddVideo}>
             <Input type="text" name="classe" placeholder="Classe" maxLength={20} />
             <Input type="text" name="url" placeholder="URL" />
             <Input type="text" name="descricao" placeholder="Descrição" maxLength={100} />

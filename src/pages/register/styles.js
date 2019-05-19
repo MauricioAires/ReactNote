@@ -87,7 +87,7 @@ export const DivForm = styled.div`
             width:100%;
         }
 
-        form label{
+        form div{
             display:flex;
             justify-items:center;
             align-items:center;
@@ -100,9 +100,14 @@ export const DivForm = styled.div`
             
             
         }
-        form label img{
+        form div img{
             width:100%;
            
+        }
+
+        span{
+            font-size:13px;
+            color:red;
         }
         input{
             padding:3px;
