@@ -216,9 +216,7 @@ class dashboard extends Component {
       email: Yup.string().email().required(),
     });
 
-    const schemaVideo = Yup.object().shape({
-      url: Yup.string().required(),
-    });
+    
     
     const schemaNote = Yup.object().shape({
       textonote: Yup.string().required(),
@@ -262,10 +260,10 @@ class dashboard extends Component {
         <div id="back-div" onClick={this.handleClickVideo}></div>
         <div>
           <label> Novo Video </label>
-          <Form schema={schemaVideo} onSubmit={this.handleAddVideo}>
-            <Input type="text" name="classe" placeholder="Classe" maxLength={20} />
-            <Input type="text" name="url" placeholder="URL" />
-            <Input type="text" name="descricao" placeholder="Descrição" maxLength={100} />
+          <Form  onSubmit={this.handleAddVideo}>
+            <Input type="text" name="classe" placeholder="Classe" />
+            <Input type="text" name="url" placeholder="https://www.youtube.com/watch?v=6okxuiiHx2w&list=PLnmSvjvookx51ne-z3AIGxGAyRxP_K8st&index=1" />
+            <Input type="text" name="descricao" placeholder="Descrição"  />
             <Input name="submit" type="submit" value="SALVAR" />
           </Form>
         </div>
