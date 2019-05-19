@@ -33,7 +33,6 @@ class login extends Component {
       this.props.history.push(`/dashboard/${this.state.userData.user.uid}`)
     }) )
     .catch((erro) => {
-      console.log(erro)
       this.setState({
         erro
       })

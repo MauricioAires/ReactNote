@@ -163,7 +163,7 @@ class dashboard extends Component {
         modalNote: !modalNote
       })
     ).catch((error) => {
-      console.error("Error adding document: ", error);
+      //console.error("Error adding document: ", error);
     });
   }
 
@@ -186,14 +186,14 @@ class dashboard extends Component {
         modalVideo: !modalVideo
       })
     ).catch((error) => {
-      console.error("Error adding document: ", error);
+      //console.error("Error adding document: ", error);
     });
   }
 
   handleRemoveNote(noteId) {
     firebase.firestore().collection('notes').doc(noteId).delete().then(() => {
     }).catch((error) => {
-      console.error("Error removing document: ", error);
+      //console.error("Error removing document: ", error);
     });
   }
 
@@ -201,7 +201,7 @@ class dashboard extends Component {
   handleRemoveVideo(videoId) {
     firebase.firestore().collection('videos').doc(videoId).delete().then(() => {
     }).catch((error) => {
-      console.error("Error removing document: ", error);
+      //console.error("Error removing document: ", error);
     });
   }
 
@@ -215,12 +215,14 @@ class dashboard extends Component {
       name: Yup.string().required(),
       email: Yup.string().email().required(),
     });
-
-    
     
     const schemaNote = Yup.object().shape({
       textonote: Yup.string().required(),
     });
+
+    
+
+
     const ModalNote =
       <DivNoteBackground>
         <div id="back-div" onClick={this.handleClickNote}></div>
@@ -260,9 +262,9 @@ class dashboard extends Component {
         <div id="back-div" onClick={this.handleClickVideo}></div>
         <div>
           <label> Novo Video </label>
-          <Form  onSubmit={this.handleAddVideo}>
+          <Form   onSubmit={this.handleAddVideo}>
             <Input type="text" name="classe" placeholder="Classe" />
-            <Input type="text" name="url" placeholder="https://www.youtube.com/watch?v=6okxuiiHx2w&list=PLnmSvjvookx51ne-z3AIGxGAyRxP_K8st&index=1" />
+            <Input type="text" required={true} name="url" placeholder="https://www.youtube.com/watch?v=6okxuiiHx2w&list=PLnmSvjvookx51ne-z3AIGxGAyRxP_K8st&index=1" />
             <Input type="text" name="descricao" placeholder="Descrição"  />
             <Input name="submit" type="submit" value="SALVAR" />
           </Form>
